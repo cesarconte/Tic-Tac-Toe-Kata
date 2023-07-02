@@ -21,7 +21,9 @@ const game = {
       this.board[index] = this.currentPlayer;
       this.totalMoves++;
       this.checkGameOver();
-      this.switchTurn();
+      if (!this.isGameOver) {
+        this.switchTurn();
+      }
     }
   },
 
@@ -52,4 +54,4 @@ const game = {
   }
 };
 
-module.exports = index;
+module.exports = game;

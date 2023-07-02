@@ -2,7 +2,7 @@
   "name": "tic-tac-toe-kata",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "tictactoe.js",
   "scripts": {
     "test": "jest"
   },
