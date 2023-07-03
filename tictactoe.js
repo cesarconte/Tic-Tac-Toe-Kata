@@ -13,18 +13,24 @@ const game = {
   // Método para cambiar el turno de los jugadores
   switchTurn() {
     this.currentPlayer = this.currentPlayer === "X" ? "O" : "X";
+    this.checkGameOver(); // Verificar si el juego ha terminado después de cambiar el turno
   },
 
   // Método para hacer un movimiento en una casilla
   makeMove(index) {
-    if (this.board[index] === "" && !this.isGameOver) {
-      this.board[index] = this.currentPlayer;
-      this.totalMoves++;
-      this.checkGameOver();
-      if (!this.isGameOver) {
-        this.switchTurn();
-      }
+    if (this.isGameOver || this.board[index] !== "") {
+      return; // Si el juego ha terminado o la casilla está ocupada, no se permite hacer más movimientos
     }
+
+    this.board[index] = this.currentPlayer;
+    this.totalMoves++;
+    this.checkGameOver();
+
+    if (this.isGameOver) {
+      return; // Si el juego ha terminado, no se permite hacer más movimientos
+    }
+
+    this.switchTurn();
   },
 
   // Método para comprobar si el juego ha terminado
@@ -37,7 +43,7 @@ const game = {
         this.board[a] === this.board[c]
       ) {
         this.isGameOver = true;
-        break;
+        break; // Salir del bucle después de encontrar una combinación ganadora
       }
     }
     if (!this.isGameOver && this.totalMoves === 9) {
